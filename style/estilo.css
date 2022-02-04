@@ -12,25 +12,51 @@ header h1{
     color: #75B79E;
     margin-top: 40px;
     font-weight: 700;
+    text-align: center;
 }
 
 main{
     margin-top: 47px;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 .carta{
     width: 117px;
     height: 146px;
-    background-color: #A7E9AF;
-    border-radius: 5px;
     box-sizing: border-box;
+    margin-right: 17px;
+    margin-left: 17px;
+    margin-bottom: 34px;
+    position: relative;
+}
+
+.face {
+    width: 100%;
+    height: 100%;
+    background-color: #A7E9AF;
     border: 1px solid #99CEA8;
-    margin-right: 34px;
-    margin-top: 34px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+}
+
+.back-face {
+    transform: rotateY(180deg);
+}
+
+.front-giro {
+    transform: rotateY(-180deg);
+}
+
+.back-giro {
+    transform: rotateY(0deg);
 }
 
 .carta img{
@@ -41,9 +67,13 @@ main{
 @media (max-width:614px) {
     header h1{
         font-size: 36px;
+        width: 312px;
     }
     main{
         flex-direction: column;
         align-items: center;
+    }
+    .carta{
+        margin-right: 0px;
     }
 }
