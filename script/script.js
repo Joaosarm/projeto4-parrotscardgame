@@ -30,13 +30,27 @@ function Jogo(){
 
     //Distribui as cartas embaralhadas
     const distribuiçao = document.querySelector('main');
-    for(let cont=0;cont<numCartas;cont++){
+    for(let cont=0;cont<numCartas/2;cont++){
         distribuiçao.innerHTML += 
-        `<div class="carta" onclick='gira(this)'>
-            <div class="front-face face" >
+        `<div class="carta" data-identifier="card" onclick='gira(this)'>
+            <div class="front-face face" data-identifier="back-face">
                 <img src="images/front.png" alt="papagaio">
             </div>
-            <div class="back-face face">
+            <div class="back-face face" data-identifier="front-face">
+                ${gifs[cont]}
+            </div>
+        </div>`;
+    } 
+
+    distribuiçao.innerHTML += `<div class="break"></div>`
+    
+    for(let cont=numCartas/2;cont<numCartas;cont++){
+        distribuiçao.innerHTML += 
+        `<div class="carta" data-identifier="card" onclick='gira(this)'>
+            <div class="front-face face" data-identifier="back-face">
+                <img src="images/front.png" alt="papagaio">
+            </div>
+            <div class="back-face face" data-identifier="front-face">
                 ${gifs[cont]}
             </div>
         </div>`;
@@ -64,14 +78,22 @@ function gira(elemento){
             ManterCartaVirada(CartaVirada.parentNode);
             setTimeout(() => ChecarFim(elemento), 300);
         }else{
+        setTimeout(ImpedirCartasDeClique, 10);
         VirarCarta(elemento);
         setTimeout(() => VirarCarta(elemento), 1000);
         setTimeout(() => VirarCarta(CartaVirada.parentNode), 1000);
+        setTimeout(ImpedirCartasDeClique, 1000);
         }
     } else{
         VirarCarta(elemento);
     }
 }
+
+//
+function ImpedirCartasDeClique(){
+    document.querySelector('.background-cartas').classList.toggle('escondido');
+}
+
 
 //Função para fazer a anomação da virada da carta
 function VirarCarta(elemento){
@@ -93,7 +115,7 @@ function ChecarFim(elemento){
     if(EstaVirada.classList.contains('front-gire')){
         ContadorCartasViradas= ContadorCartasViradas+2;
     }
-    if(ContadorCartasViradas==gifs.length){
+    if(ContadorCartasViradas===gifs.length){
         clearInterval(TempoDeJogo);
         alert(`Você ganhou em ${ContadorDeJogadas} jogadas e ${Tempo.innerHTML} segundos!`)
         JogarNovamente();
@@ -103,7 +125,7 @@ function ChecarFim(elemento){
 //Funçao que pergunta se o jogador quer jogar novamente após o fim do jogo
 function JogarNovamente(){
     const Resp = prompt('Você quer jogar novamente? (s ou n))');
-    if(Resp=='s'||Resp=='S'){
+    if(Resp==='s'||Resp==='S'){
         document.querySelector('main').innerHTML="";
         Jogo();
     } else{

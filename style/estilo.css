@@ -18,19 +18,27 @@ header h1{
     text-align: center;
 }
 
+.break {
+    flex-basis: 100%;
+    height: 0;
+  }
+
 /* ---------- CRONOMETRO QUE CONTA O TEMPO DO JOGO ----------- */
 .cronometro{
     color: red;
-    position: relative;
-    left: calc(50vw + 270px);
-    top: 3vh;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    margin-left: 250px;
+    align-items: center;
     font-size: 25px;
     font-weight: 700;
 }
 
 /* ---------- CAMPO DAS CARTAS ----------- */
 main{
-    margin-top: 47px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -94,6 +102,18 @@ main{
     height: 100px;
 }
 
+.background-cartas{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+}
+
+.escondido{
+    display: none;
+}
+
 /* --------- AJUSTES PARA CELULAR ------------ */
 @media (max-width:614px) {
     header h1{
@@ -105,6 +125,6 @@ main{
         align-items: center;
     }
     .cronometro{
-        left: 50vw;
+        margin-left: 0px;
     }
 }
